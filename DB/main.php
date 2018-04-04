@@ -13,6 +13,9 @@ class Main {
         else if($fetchtype == 2){
             $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
+        else{
+            $result = $stmt->fetchColumn();
+        }
         return $result;
     }
 
@@ -33,8 +36,6 @@ class Main {
         }
         return $selects;
     }
-
-
 
     function filter($table_fields, $postData){
         $query = "SELECT * FROM ".$GLOBALS['table']." WHERE ";
@@ -65,8 +66,8 @@ class Main {
         }
         $_SESSION['filter'] = true;
         $_SESSION['query'] = $query;
+        $this->checkRes($_SESSION['query'], 0);
         $query = $query.' '.'LIMIT 10 OFFSET 0';
-        // echo $query;
         return $query;
     }
 
@@ -76,7 +77,17 @@ class Main {
         return $table_fields;
     }
 
-    function getQuery($req=null, $current=0, $pquery=null){
+    function checkRes($query, $current){
+        $result = $this->fetchData($query, 3);
+        if($result == null || $result == 0){
+            echo 'No results Found.';
+        }
+        else{
+            echo "Page ".$current." of ".$result.' pages';
+        }
+    }
+
+    function getQuery($req=null, $current=0){
         $offset = $current*10;
         $base = "SELECT * FROM ".$GLOBALS['table'].' ';
         $limitset = "LIMIT 10 OFFSET ".$offset;
@@ -86,9 +97,12 @@ class Main {
         else if($req == "change"){
             if($_SESSION['filter']==false){
                 $query = $base.$limitset;
+                $baseCount = "SELECT COUNT(*) FROM ".$GLOBALS['table'];
+                $this->checkRes($baseCount, $current);
             }
             else{
                 $query = $_SESSION['query'].' '.$limitset;
+                $this->checkRes($_SESSION['query'], $current);
             }
         }
         return $query;

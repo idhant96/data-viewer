@@ -34,7 +34,7 @@
       <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4">
-                 <form action="/index.php" method="get">
+                 <form action="index.php" method="get">
                     Page: <input type="text" name="from"><br>
                     <input type="submit" value="Fetch">
                 </form>
@@ -51,6 +51,7 @@
                 <button type="button" class="btn btn-primary" id='click' data-toggle="modal" data-target="#exampleModal">
                 Filter
                 </button>
+                <a class='btn btn-danger' type='button' href='index.php?page=-1'>Reset</a>
              </div>
         </div>
      </div>
