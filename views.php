@@ -75,7 +75,7 @@
                                     <div class="col-md-4 col-sm-6"><?php echo $field; ?></div>
                                     <div class="col-md-8 col-sm-6">
                                         <div class="form-group">
-                                        <select class='js-example-basic-multiple' name="<?php echo $field; ?>" multiple="multiple"style="width:100%;max-width:90%;">
+                                        <select class='js-example-basic-multiple' name="<?php echo $field; ?>[]" multiple="multiple"style="width:100%;max-width:90%;">
                                             <?php 
                                             if(in_array($field ,array_keys($selects))){
                                                 for($i=0;$i<sizeof($selects[$field]); $i++){ ?>

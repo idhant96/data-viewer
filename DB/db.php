@@ -3,7 +3,7 @@ $servername = "localhost";
 $username = "root";
 $password = "idhant";
 $db = "backup";
-$GLOBALS['table'] = "firms";
+$GLOBALS['table'] = "docs";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=".$db, $username, $password);
     // set the PDO error mode to exception

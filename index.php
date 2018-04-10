@@ -5,12 +5,14 @@
 session_start();
 
 $utils = new main;
-
+$table_fields = null;
 $current = 0;
 $query = $utils->getQuery($current=0);
+// echo $query;
 $results = $utils->fetchData($query, 1);
+// print_r($results);
 $table_fields = $utils->getCols();
-
+// var_dump($table_fields);
 if($_GET['page'] == -1){
     $_POST = array();
     $_GET = array();
@@ -33,9 +35,14 @@ else if(isset($_GET['page'])){
 }
 
 else if($_SERVER["REQUEST_METHOD"] == "POST") {
+        // var_dump($_POST);
         $query = $utils->filter($table_fields, $_POST);
         $results = $utils->fetchData($query, 1);
-     }
+        // foreach($_POST as $key=>$val){
+        //         print_r($_POST[$key]);die;
+        //         }
+        // }
+        }
 
 $selects = $utils->getOptions($table_fields);
     
